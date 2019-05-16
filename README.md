@@ -9,7 +9,7 @@ The goal of this project is to implement SLAM for a quadcopter.
 
 ## Hardware
 ### Parts List
-Frame: [DJI Framewheel F450](https://docs.px4.io/en/frames_multicopter/dji_flamewheel_450.html) ($230)
+Frame: [DJI Flamewheel F450](https://docs.px4.io/en/frames_multicopter/dji_flamewheel_450.html) ($230)
 
 Controller: [Pixracer](https://docs.px4.io/en/flight_controller/pixracer.html) ($99)
 
