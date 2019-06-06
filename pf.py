@@ -159,26 +159,28 @@ while(1):
 
     cv2.imshow(WINDOW_NAME,img)
     img = np.zeros((HEIGHT,WIDTH,3), np.uint8)
-    drawLines(img, trajectory,   0,   255, 0)
-    drawCross(img, center, r=255, g=0, b=0)
+    img.fill(255)
+    # img = np.full((HEIGHT,WIDTH,3),255)
+    drawLines(img, trajectory,   255,0, 0)
+    # drawCross(img, center, r=255, g=0, b=0)
     
     #landmarks
     for landmark in landmarks:
-        cv2.circle(img,tuple(landmark),10,(255,0,0),-1)
+        cv2.circle(img,tuple(landmark),10,(0,0,255),-1)
     
     #draw_particles:
     for particle in particles:
-        cv2.circle(img,tuple((int(particle[0]),int(particle[1]))),1,(255,255,255),-1)
+        cv2.circle(img,tuple((int(particle[0]),int(particle[1]))),1,(0,0,0),-1)
 
     if cv2.waitKey(DELAY_MSEC) & 0xFF == 27:
         break
     
-    cv2.circle(img,(10,10),10,(255,0,0),-1)
-    cv2.circle(img,(10,30),3,(255,255,255),-1)
-    cv2.putText(img,"Landmarks",(30,20),1,1.0,(255,0,0))
-    cv2.putText(img,"Particles",(30,40),1,1.0,(255,255,255))
-    cv2.putText(img,"Robot Trajectory(Ground truth)",(30,60),1,1.0,(0,255,0))
+    # cv2.circle(img,(10,10),10,(0,0,255),-1)
+    # cv2.circle(img,(10,30),3,(255,255,255),-1)
+    # cv2.putText(img,"Landmarks",(30,20),1,1.0,(255,0,0))
+    # cv2.putText(img,"Particles",(30,40),1,1.0,(255,255,255))
+    # cv2.putText(img,"Robot Trajectory(Ground truth)",(30,60),1,1.0,(0,255,0))
 
-    drawLines(img, np.array([[10,55],[25,55]]), 0, 255, 0)
+    # drawLines(img, np.array([[10,55],[25,55]]), 0, 255, 0)
 
 cv2.destroyAllWindows()
