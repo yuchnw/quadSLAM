@@ -26,4 +26,4 @@ Monte Carlo localization (MCL), also known as particle filter localization, is a
 
 In this project, the verticle distance from the quadcopter to the 3D map would be measured by lidar sensor. Giving the data, Particle Filter will generate a series of possible locations in the map to represent the current position and update the candidates each time.
 
-[!init]()
+[!init](/img/init.png)
