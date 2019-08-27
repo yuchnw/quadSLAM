@@ -1,4 +1,4 @@
-# Toy Helicopter SLAM
+# Quadcopter Lidar Sensing and Mapping
 **Yuchen Wang**
 
 *Northwestern University*
@@ -18,7 +18,7 @@ Sensors: HTC Vive Lighthouse, [Lidar-Lite V3](https://buy.garmin.com/en-US/US/p/
 ### Wiring Instruction
 There are specs and examples online showing the detailed wiring instruction.
 
-According to PX4 website, it's possible to control Blade 130X helicopter using pixhawk. However, considering the size of the helicopter is not capable of extra sensors or cameras, I decided not to use that.
+According to PX4 website, it's possible to control multiple types if UAV using pixhawk. However, considering the size of any extra sensor or camera, I decided to use DJI Flamewheel F450 and Pixracer.
 
 ## Code
 ### Particle Filter
@@ -27,3 +27,5 @@ Monte Carlo localization (MCL), also known as particle filter localization, is a
 In this project, the verticle distance from the quadcopter to the 3D map would be measured by lidar sensor. Giving the data, Particle Filter will generate a series of possible locations in the map to represent the current position and update the candidates each time.
 
 ![init](/img/init.png)
+![2](/img/2.png)
+![1](/img/1.png)
