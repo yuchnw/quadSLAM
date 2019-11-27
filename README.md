@@ -32,8 +32,12 @@ There are specs and examples online showing the detailed wiring instruction.
 ### QGroundControl
 After the assembly being properly done, the quad should be connected and configured at ground station. In this case, QGroundControl has been selected since it's the default ground station UI for PX4. Following the instruction online to install QGC on a laptop, the next step would be connect/pair the pixhawk with it. After booting the pixracer, the WiFi module plugged on that should be able to establish a local WiFi network with the name **ArduPilot** with password **ardupilot**. Connect to that network on the laptop and then launch QGC, wait for a few seconds, QGC will show that it has successfully connected to the pixhawk. All the parameters and current status of the flight controller will be displayed.
 
-## Configuration and Tuning
+### Configuration and Tuning
 
+### Companion Computer
+#### ROS Installation
+
+## Lidar Sensor
 
 ## Code
 ### Particle Filter
