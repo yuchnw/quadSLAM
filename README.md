@@ -32,10 +32,23 @@ There are specs and examples online showing the detailed wiring instruction.
 ### QGroundControl
 After the assembly being properly done, the quad should be connected and configured at ground station. In this case, QGroundControl has been selected since it's the default ground station UI for PX4. Following the instruction online to install QGC on a laptop, the next step would be connect/pair the pixhawk with it. After booting the pixracer, the WiFi module plugged on that should be able to establish a local WiFi network with the name **ArduPilot** with password **ardupilot**. Connect to that network on the laptop and then launch QGC, wait for a few seconds, QGC will show that it has successfully connected to the pixhawk. All the parameters and current status of the flight controller will be displayed.
 
-### Configuration and Tuning
+### Calibration
+The first time booting PX4 on pixhawk, connect pixracer to laptop using USB cable. Click **Firmware** at left side of QGroundControl and start flashing the PX4 firmware to the pixhawk. Once done, the general configuration could be set either wirelessly or using USB cable. For the convinience of setting the compass properly, I chose to do it through WiFi. After connecting pixhawk with QGC, click **Airframe** and choose **Quadrotor X** -> **DJI Flame Wheel 450**. Reboot the vehicle and then start the calibration step by step (i.e. compass, battery, sensors).
+:bangbang:Considering that RC is not used for this project, make sure to set `ARMING_CHECK` to **0**:bangbang:
+
+### Tuning
 
 ### Companion Computer
+As the quadcopter having a lidar sensor mounted on, it's easier and faster to process lidar data on a direct connected companion computer instead of transmitting the data to laptop using WiFi.
+
+#### Raspberry Pi
+Interfacing a companion computer (Raspberry Pi, Odroid, Tegra K1) to Pixhawk-family boards always works the same way: They are interfaced using a serial port to `TELEM 2`, the port intended for this purpose. The message format on this link is MAVLink. In order to receive MAVLink, the companion computer needs to run some software talking to the serial port. **MAVROS** has been chosen for this project to communicate to ROS node. ROS Kinetic only supports Ubuntu 16.04 and Raspbian, and Ubuntu Mate 16.04 is no longer available for Raspberry Pi, I decided to build Raspbian Jessie on RPi 3+. 
+
 #### ROS Installation
+Follow the instruction [here](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi) to install ROS Kinetic on RPi. Here are some notes for the installation:
+> **DON'T** install packages using `sudo apt-get install`, this command doesn't work for Raspbian OS. Use `rosinstall_generator depName --rosdistro kinetic --deps -wet-only --tar > kinetic-depName-wet.rosinstall`.
+> When installing MAVROS, it's highly likely that the board would get overheated. Use a mini desk fan to cool it down during the installation.
+> To prevent system crash, run `catkin_make_isolated -j1` to build only one package at a time.
 
 ## Lidar Sensor
 
