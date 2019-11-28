@@ -46,9 +46,11 @@ Interfacing a companion computer (Raspberry Pi, Odroid, Tegra K1) to Pixhawk-fam
 
 #### ROS Installation
 Follow the instruction [here](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi) to install ROS Kinetic on RPi. Here are some notes for the installation:
-> **DON'T** install packages using `sudo apt-get install`, this command doesn't work for Raspbian OS. Use `rosinstall_generator depName --rosdistro kinetic --deps -wet-only --tar > kinetic-depName-wet.rosinstall`.
-> When installing MAVROS, it's highly likely that the board would get overheated. Use a mini desk fan to cool it down during the installation.
-> To prevent system crash, run `catkin_make_isolated -j1` to build only one package at a time.
+* **DON'T** install packages using `sudo apt-get install`, this command doesn't work for Raspbian OS. Use `rosinstall_generator depName --rosdistro kinetic --deps -wet-only --tar > kinetic-depName-wet.rosinstall`.
+
+* When installing MAVROS, it's highly likely that the board would get overheated. Use a mini desk fan to cool it down during the installation.
+
+* To prevent system crash, run `catkin_make_isolated -j1` to build only one package at a time.
 
 ## Lidar Sensor
 
