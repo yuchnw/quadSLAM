@@ -23,7 +23,11 @@ Battery: Turnigy 3000mAh 3S 20C [Lipo Battery](https://www.amazon.com/Turnigy-30
 ### Assemble Instruction
 According to PX4 website, it's possible to control multiple types if UAV using pixhawk. However, considering the size of any extra sensor or camera, I decided to use DJI Flamewheel F450 and the Pixracer controller.
 
+Here is the overall view of the quadcopter.
+![quad](/img/quad.png)
+
 The original drone kit was a pack of parts including 4 motors, 4 propellors, 4 ESCs, 2 main boards, 4 frame bases, and necessary screws. To assemble the quadcopter, I mostly followed the official DJI [tutorial](https://www.youtube.com/watch?v=pUTHIL_Xfcc). However, since I am using pixhawk instead of the included Maza flight controller system, I slightly adjust the arrangement of the electronic parts. As the figure shows, the power module is in between of the top board and bottom board, with the battery port and ESCs soldered on. The pixhawk and WiFi module(ESP8266) are put at the top board with a piece of foam to reduce vibration.
+![power](/img/power.png)
 
 There are specs and examples online showing the detailed wiring instruction.
 
@@ -32,8 +36,12 @@ There are specs and examples online showing the detailed wiring instruction.
 ### QGroundControl
 After the assembly being properly done, the quad should be connected and configured at ground station. In this case, QGroundControl has been selected since it's the default ground station UI for PX4. Following the instruction online to install QGC on a laptop, the next step would be connect/pair the pixhawk with it. After booting the pixracer, the WiFi module plugged on that should be able to establish a local WiFi network with the name **ArduPilot** with password **ardupilot**. Connect to that network on the laptop and then launch QGC, wait for a few seconds, QGC will show that it has successfully connected to the pixhawk. All the parameters and current status of the flight controller will be displayed.
 
+Here is the close look of the wiring of pixhawk.
+![pixhawk](/img/px4.png)
+
 ### Calibration
 The first time booting PX4 on pixhawk, connect pixracer to laptop using USB cable. Click **Firmware** at left side of QGroundControl and start flashing the PX4 firmware to the pixhawk. Once done, the general configuration could be set either wirelessly or using USB cable. For the convinience of setting the compass properly, I chose to do it through WiFi. After connecting pixhawk with QGC, click **Airframe** and choose **Quadrotor X** -> **DJI Flame Wheel 450**. Reboot the vehicle and then start the calibration step by step (i.e. compass, battery, sensors).
+
 :bangbang:Considering that RC is not used for this project, make sure to set `ARMING_CHECK` to **0**:bangbang:
 
 ### Tuning
@@ -43,6 +51,7 @@ As the quadcopter having a lidar sensor mounted on, it's easier and faster to pr
 
 #### Raspberry Pi
 Interfacing a companion computer (Raspberry Pi, Odroid, Tegra K1) to Pixhawk-family boards always works the same way: They are interfaced using a serial port to `TELEM 2`, the port intended for this purpose. The message format on this link is MAVLink. In order to receive MAVLink, the companion computer needs to run some software talking to the serial port. **MAVROS** has been chosen for this project to communicate to ROS node. ROS Kinetic only supports Ubuntu 16.04 and Raspbian, and Ubuntu Mate 16.04 is no longer available for Raspberry Pi, I decided to build Raspbian Jessie on RPi 3+. 
+![pi](/img/pi.png)
 
 #### ROS Installation
 Follow the instruction [here](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi) to install ROS Kinetic on RPi. Here are some notes for the installation:
@@ -52,7 +61,10 @@ Follow the instruction [here](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20
 
 * To prevent system crash, run `catkin_make_isolated -j1` to build only one package at a time.
 
+#### MAVPROXY
+
 ## Lidar Sensor
+![lidar](/img/lidar.png)
 
 ## Code
 ### Particle Filter
