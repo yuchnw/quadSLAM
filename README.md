@@ -5,7 +5,7 @@
 
 
 ## Introduction
-The goal of this project is to implement 3D mapping for a quadcopter.
+The goal of this project is to implement 3D mapping for a quadcopter using lidar sensor.
 
 ## Hardware
 ### Parts List
@@ -47,6 +47,7 @@ The first time booting PX4 on pixhawk, connect pixracer to laptop using USB cabl
 :bangbang:Considering that RC is not used for this project, make sure to set `ARMING_CHECK` to **0**:bangbang:
 
 ### Tuning
+![fly](/img/fly.gif)
 
 ### Companion Computer
 As the quadcopter having a lidar sensor mounted on, it's easier and faster to process lidar data on a direct connected companion computer instead of transmitting the data to laptop using WiFi.
@@ -72,6 +73,9 @@ MAVProxy is a fully-functioning GCS for UAV’s. The intent is for a minimalist,
 ## Lidar Sensor
 As a compact and high-performace distance measurement device, *Lidar Lite V3* has been used to generate 3D map.
 ![lidar](/img/lidar.png)
+
+Here is the point cloud map generated from the lidar sensor when it's scanning the corner of the lab room.
+![piintcloud](/img/pointcloud.gif)
 
 ## Code
 ### Particle Filter
