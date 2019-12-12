@@ -68,17 +68,26 @@ Follow the instruction [here](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20
 * To prevent system crash, run `catkin_make_isolated -j1` to build only one package at a time.
 
 #### MAVPROXY
-MAVProxy is a fully-functioning GCS for UAV’s. The intent is for a minimalist, portable and extendable GCS for any UAV supporting the MAVLink protocol.
+MAVProxy is a fully-functioning GCS for UAV’s. The intent is for a minimalist, portable and extendable GCS for any UAV supporting the MAVLink protocol. The companion computer communicates with the master pixhawk flight controller through MAVPROXY. It supports multiple protocols including *tcp*, *udp*, USB and serial. This project used serial connection so the connection string for MAVLINK should be **/dev/ttyAMA0**. Note that the baudrate on both the pixhawk and raspberry pi should be set to **57600**.
+
+Once connection has been established, you can use the connection's `mavutil.messages` dictionary to synchronously access the last message of a particular type that was received (and when it was received).
 
 ## Lidar Sensor
 As a compact and high-performace distance measurement device, *Lidar Lite V3* has been used to generate 3D map.
 ![lidar](/img/lidar.png)
 
+The rapsberry pi will take the altitude and orientation return from pixhawk through MAVPROXY, and the distance measured by the lidar sensor, to generate a customized 3D point cloud data map. The point cloud data would be saved to a *.xyz* file and visualized in Meshlab.
+
 Here is the point cloud map generated from the lidar sensor when it's scanning the corner of the lab room.
 ![piintcloud](/img/pointcloud.gif)
 
 ## Code
+### Connection
+`mavlink_control.cpp` is the file that sets up the connection through MAVPROXY and retrieve data from LIDAR sensor.
+
 ### Particle Filter
+As the advanced goal for this project, `pf.py` is the script accomplishes localization with particle filter.
+
 Monte Carlo localization (MCL), also known as particle filter localization, is an algorithm for robots to localize using a particle filter. Given a map of the environment, the algorithm estimates the position and orientation of a robot as it moves and senses the environment. The algorithm uses a particle filter to represent the distribution of likely states, with each particle representing a possible state, i.e., a hypothesis of where the robot is.[4] The algorithm typically starts with a uniform random distribution of particles over the configuration space, meaning the robot has no information about where it is and assumes it is equally likely to be at any point in space.  Whenever the robot moves, it shifts the particles to predict its new state after the movement. Whenever the robot senses something, the particles are resampled based on recursive Bayesian estimation, i.e., how well the actual sensed data correlate with the predicted state. Ultimately, the particles should converge towards the actual position of the robot.
 
 In this project, the verticle distance from the quadcopter to the 3D map would be measured by lidar sensor. Giving the data, Particle Filter will generate a series of possible locations in the map to represent the current position and update the candidates each time.
