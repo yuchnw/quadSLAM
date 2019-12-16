@@ -81,9 +81,12 @@ The rapsberry pi will take the altitude and orientation return from pixhawk thro
 Here is the point cloud map generated from the lidar sensor when it's scanning the corner of the lab room.
 ![piintcloud](/img/pointcloud.gif)
 
+And this is the real environment of that corner of the lab.
+![real](/img/real.gif)
+
 ## Code
 ### Connection
-`mavlink_control.cpp` is the file that sets up the connection through MAVPROXY and retrieve data from LIDAR sensor.
+[`mavlink_control.cpp`](https://github.com/yuchnw/c_uart_interface_example/blob/master/mavlink_control.cpp) is the file that sets up the connection through MAVPROXY and retrieve data from LIDAR sensor. It comes from the original `c_uart_interface_example` [repository](https://github.com/yuchnw/c_uart_interface_example) and has been modified to establish connection and integrated with lidar data.
 
 ### Particle Filter
 As the advanced goal for this project, `pf.py` is the script accomplishes localization with particle filter.
